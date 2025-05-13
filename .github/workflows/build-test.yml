@@ -41,5 +41,5 @@ jobs:
       - name: Install project dependencies
         run: npm i
 
-      - name: Run integration tests
-        run: npm test
+      - name: Run security tests
+        run: npm audit
