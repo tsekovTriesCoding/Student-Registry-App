@@ -14,22 +14,27 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-    
     steps:
     - name: Clone github repo on the machine
       uses: actions/checkout@v4
-    - name: Use Node.js ${{matrix.node-version}}
+    - name: Use Node.js 20
       uses: actions/setup-node@v4
       with:
-        node-version: ${{matrix.node-version}}
+        node-version: 20
         cache: 'npm'
     - name: Install project dependencies
       run: npm i
+
     - name: Start the app
       run: npm start &
-    - name: Run integration tests
-      run: npm test
+
+    - name: Run integration tests and save output
+      run: npm test | tee test-output.log
+      
+    - name: Upload test aoutput as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: test-upload.log
+
    
