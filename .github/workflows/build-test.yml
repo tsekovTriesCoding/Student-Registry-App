@@ -30,11 +30,11 @@ jobs:
 
     - name: Run integration tests and save output
       run: npm test | tee test-output.log
-      
-    - name: Upload test aoutput as artifact
+
+    - name: Upload test output as artifact
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: test-upload.log
+        path: test-output.log
 
    
